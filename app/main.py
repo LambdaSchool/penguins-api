@@ -1,7 +1,8 @@
 import random
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from joblib import load
+# from joblib import load
 import pandas as pd
 from pydantic import BaseModel, confloat
 
@@ -25,7 +26,7 @@ app.add_middleware(
     allow_methods=['*']
 )
 
-classifier = load('app/classifier.joblib')
+# classifier = load('app/classifier.joblib')
 
 
 class Penguin(BaseModel):
@@ -40,6 +41,14 @@ class Penguin(BaseModel):
 
 @app.post('/predict')
 def predict_species(penguin: Penguin):
+    if penguin['bill_depth_mm'] < 16.5:
+        return "Gentoo"
+    else:
+        if penguin['bill_length_mm'] > 43:
+            return "Chinstrap"
+        else:
+            return "Adelie"
+    
     """Predict penguin species from bill length & depth
     
     Parameters
@@ -50,13 +59,15 @@ def predict_species(penguin: Penguin):
     Returns
     -------
     str "Adelie", "Chinstrap", or "Gentoo"  
+
+
     """
-    species = classifier.predict(penguin.to_df())
-    return species[0]
+    # species = classifier.predict(penguin.to_df())
+    # return species[0]
 
 
-@app.get('/random')
-def random_penguin():
-    """Return a random penguin species"""
-    species = random.choice(['Adelie', 'Chinstrap', 'Gentoo'])
-    return species
+# @app.get('/random')
+# def random_penguin():
+#     """Return a random penguin species"""
+#     species = random.choice(['Adelie', 'Chinstrap', 'Gentoo'])
+#     return species
