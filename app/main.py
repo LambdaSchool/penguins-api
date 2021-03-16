@@ -41,13 +41,14 @@ class Penguin(BaseModel):
 
 @app.post('/predict')
 def predict_species(penguin: Penguin):
-    if penguin['bill_depth_mm'] < 16.5:
-        return "Gentoo"
-    else:
-        if penguin['bill_length_mm'] > 43:
-            return "Chinstrap"
-        else:
-            return "Adelie"
+    print(penguin)
+    # if penguin['bill_depth_mm'] < 16.5:
+    #     return "Gentoo"
+    # else:
+    #     if penguin['bill_length_mm'] > 43:
+    #         return "Chinstrap"
+    #     else:
+    #         return "Adelie"
     
     """Predict penguin species from bill length & depth
     
