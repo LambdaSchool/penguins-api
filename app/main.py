@@ -41,7 +41,7 @@ class Penguin(BaseModel):
 
 @app.post('/predict')
 def predict_species(penguin: Penguin):
-    return "Hello world!"
+    return penguin.to_df()
     # if penguin['bill_depth_mm'] < 16.5:
     #     return "Gentoo"
     # else:
