@@ -51,12 +51,11 @@ def predict_species(penguin: Penguin):
 
     """
     penguin = penguin.to_df()
-    return penguin['bill_length_mm'][0]
-    # return penguin['bill_depth_mm']['0']    
-    # if penguin['bill_depth_mm']['0'] < 16.5:
-    #     return "Gentoo"
-    # else:
-    #     if penguin['bill_length_mm']['0'] > 43:
-    #         return "Chinstrap"
-    #     else:
-    #         return "Adelie"
+ 
+    if penguin['bill_depth_mm'][0] < 16.5:
+        return "Gentoo"
+    else:
+        if penguin['bill_length_mm'][0] > 43:
+            return "Chinstrap"
+        else:
+            return "Adelie"
